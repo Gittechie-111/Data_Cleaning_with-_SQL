@@ -1,25 +1,39 @@
-# Global Layoffs Data Cleaning (MySQL)
+# Global Layoffs Analysis (MySQL)
 
-A SQL data cleaning project that takes a raw dataset of global tech layoffs
-and transforms it into a clean, analysis-ready table using MySQL.
+A SQL project that cleans and analyzes a raw dataset of global tech layoffs
+spanning 2020–2023, using MySQL for transformation and exploratory analysis.
 
 ## Dataset
 
-The raw data (`layoffs.csv`) contains records of company layoffs including:
-- Company name and location
-- Industry
-- Total employees laid off
-- Percentage laid off
-- Date, funding stage, and country
-- Funds raised (in millions)
+The raw data (`layoffs.csv`) contains records of company layoffs, with the
+following fields:
+
+- `company` — name of the company
+- `location` — city / region
+- `industry` — sector (e.g. Consumer, Retail, Crypto)
+- `total_laid_off` — number of employees laid off
+- `percentage_laid_off` — fraction of workforce laid off (0–1)
+- `date` — date of the layoff event
+- `stage` — funding stage (e.g. Post-IPO, Series B)
+- `country` — country of the company
+- `funds_raised_millions` — total funds raised, in millions
 
 ## Tools Used
 
-- **MySQL** — data cleaning and transformation
-- **VS Code** — with the SQLTools extension
+- **MySQL 8** — data cleaning and analysis
+- **VS Code** with the SQLTools extension
 - **Git / GitHub** — version control
 
-## Cleaning Steps
+## Project Structure
+
+| File | Description |
+|---|---|
+| `layoffs.csv` | Raw, uncleaned dataset |
+| `data_cleaning.sql` | Cleaning pipeline: dedup, standardize, handle nulls |
+| `exploratory_data_analysis.sql` | EDA queries: totals, trends, rankings |
+| `README.md` | This document |
+
+## Data Cleaning Steps
 
 The `data_cleaning.sql` script performs the following:
 
@@ -39,42 +53,40 @@ The `data_cleaning.sql` script performs the following:
 6. **Removed rows with no usable layoff data** (both `total_laid_off`
    and `percentage_laid_off` were NULL).
 
-## Files
+## Exploratory Analysis
 
-| File | Description |
-|---|---|
-| `layoffs.csv` | Raw, uncleaned dataset |
-| `data_cleaning.sql` | All SQL cleaning queries |
-| `README.md` | Project documentation |
+The `exploratory_data_analysis.sql` file answers questions such as:
+
+- **Overall magnitude** — maximum single layoff event and maximum percentage laid off
+- **By company** — total layoffs per company, ranked
+- **By industry** — which sectors were hit hardest
+- **By country** — geographic distribution of layoffs
+- **By funding stage** — where in the lifecycle layoffs concentrated
+- **Time series** — layoffs aggregated by month and year
+- **Rolling total** — cumulative layoffs over time using a window function
+- **Top 5 companies per year** — using `DENSE_RANK()` partitioned by year
 
 ## Key SQL Concepts Used
 
-- `ROW_NUMBER()` with `PARTITION BY` for duplicate detection
-- `CREATE TABLE ... LIKE` and `INSERT INTO ... SELECT`
-- Self-joins to populate missing values
-- `UPDATE` with `LIKE` pattern matching for text standardization
-- `DELETE` with CTEs (`WITH` clauses)
+- **CTEs (`WITH`)** for readable, layered queries
+- **Window functions**: `DENSE_RANK() OVER (PARTITION BY ...)`, `SUM(...) OVER (ORDER BY ...)` for rolling totals
+- **Aggregation**: `SUM`, `GROUP BY`, `ORDER BY` on aliased columns
+- **Date handling**: `YEAR()`, `MONTH()`, `SUBSTRING()` on text-stored dates
+- **Self-joins** for backfilling missing values
+- **`ROW_NUMBER()`** for duplicate detection
 
 ## How to Reproduce
 
 1. Clone this repository.
 2. Open MySQL and create a database:
+
    ```sql
    CREATE DATABASE world_layoffs;
    USE world_layoffs;
 
-3. Run data_cleaning.sql in order, top to bottom.
+3. Run data_cleaning.sql from top to bottom.
 
-4. Query the final table:
-   ```sql
-   SELECT * FROM layoffs_staging2;
+4. Then run exploratory_data_analysis.sql to explore the cleaned data.
 
-Author
 Triza Museve — aspiring data analyst
 https://github.com/Gittechie-111
-
-
-
-   
-
-   
