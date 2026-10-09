@@ -1,0 +1,139 @@
+# The proper term is pseudo_replica_mode, but we use this compatibility alias
+# to make the statement usable on server versions 8.0.24 and older.
+/*!50530 SET @@SESSION.PSEUDO_SLAVE_MODE=1*/;
+/*!50003 SET @OLD_COMPLETION_TYPE=@@COMPLETION_TYPE,COMPLETION_TYPE=0*/;
+DELIMITER /*!*/;
+# at 4
+#261007  0:00:00 server id 1  end_log_pos 126 CRC32 0xaee37be5 	Start: binlog v 4, server v 8.0.46-0ubuntu0.24.04.3 created 261007  0:00:00
+# Warning: this binlog is either in use or was not closed properly.
+# at 126
+#261007  0:00:00 server id 1  end_log_pos 157 CRC32 0xde78a4f6 	Previous-GTIDs
+# [empty]
+# at 157
+#261007  9:09:53 server id 1  end_log_pos 236 CRC32 0x5df56493 	Anonymous_GTID	last_committed=0	sequence_number=1	rbr_only=yes	original_committed_timestamp=1791353393430050	immediate_commit_timestamp=1791353393430050	transaction_length=970
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1791353393430050 (2026-10-07 09:09:53.430050 EAT)
+# immediate_commit_timestamp=1791353393430050 (2026-10-07 09:09:53.430050 EAT)
+/*!80001 SET @@session.original_commit_timestamp=1791353393430050*//*!*/;
+/*!80014 SET @@session.original_server_version=80046*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80046*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 236
+#261007  9:09:53 server id 1  end_log_pos 329 CRC32 0xe1a093c9 	Query	thread_id=82	exec_time=0	error_code=0
+SET TIMESTAMP=1791353393/*!*/;
+SET @@session.pseudo_thread_id=82/*!*/;
+SET @@session.foreign_key_checks=1, @@session.sql_auto_is_null=0, @@session.unique_checks=1, @@session.autocommit=1/*!*/;
+SET @@session.sql_mode=1168113704/*!*/;
+SET @@session.auto_increment_increment=1, @@session.auto_increment_offset=1/*!*/;
+/*!\C utf8mb4 *//*!*/;
+SET @@session.character_set_client=224,@@session.collation_connection=224,@@session.collation_server=255/*!*/;
+SET @@session.lc_time_names=0/*!*/;
+SET @@session.collation_database=DEFAULT/*!*/;
+/*!80011 SET @@session.default_collation_for_utf8mb4=255*//*!*/;
+BEGIN
+/*!*/;
+# at 329
+#261007  9:09:53 server id 1  end_log_pos 422 CRC32 0x4fc62f41 	Table_map: `world_layoffs`.`layoffs_staging2` mapped to number 100
+# has_generated_invisible_primary_key=0
+# at 422
+#261007  9:09:53 server id 1  end_log_pos 1096 CRC32 0xfaa01562 	Update_rows: table id 100 flags: STMT_END_F
+### UPDATE `world_layoffs`.`layoffs_staging2`
+### WHERE
+###   @1='Indigo'
+###   @2='Boston'
+###   @3='Other'
+###   @4=NULL
+###   @5=NULL
+###   @6='3/3/2023'
+###   @7='Series F'
+###   @8='United States.'
+###   @9=1200
+###   @10=1
+### SET
+###   @1='Indigo'
+###   @2='Boston'
+###   @3='Other'
+###   @4=NULL
+###   @5=NULL
+###   @6='3/3/2023'
+###   @7='Series F'
+###   @8='United States'
+###   @9=1200
+###   @10=1
+### UPDATE `world_layoffs`.`layoffs_staging2`
+### WHERE
+###   @1='Landing'
+###   @2='Birmingham'
+###   @3='Real Estate'
+###   @4=110
+###   @5=NULL
+###   @6='10/6/2022'
+###   @7='Series C'
+###   @8='United States.'
+###   @9=347
+###   @10=1
+### SET
+###   @1='Landing'
+###   @2='Birmingham'
+###   @3='Real Estate'
+###   @4=110
+###   @5=NULL
+###   @6='10/6/2022'
+###   @7='Series C'
+###   @8='United States'
+###   @9=347
+###   @10=1
+### UPDATE `world_layoffs`.`layoffs_staging2`
+### WHERE
+###   @1='Palantir'
+###   @2='Denver'
+###   @3='Data'
+###   @4=75
+###   @5='0.02'
+###   @6='2/27/2023'
+###   @7='Post-IPO'
+###   @8='United States.'
+###   @9=3000
+###   @10=1
+### SET
+###   @1='Palantir'
+###   @2='Denver'
+###   @3='Data'
+###   @4=75
+###   @5='0.02'
+###   @6='2/27/2023'
+###   @7='Post-IPO'
+###   @8='United States'
+###   @9=3000
+###   @10=1
+### UPDATE `world_layoffs`.`layoffs_staging2`
+### WHERE
+###   @1='Twilio'
+###   @2='SF Bay Area'
+###   @3='Other'
+###   @4=1500
+###   @5='0.17'
+###   @6='2/13/2023'
+###   @7='Post-IPO'
+###   @8='United States.'
+###   @9=614
+###   @10=1
+### SET
+###   @1='Twilio'
+###   @2='SF Bay Area'
+###   @3='Other'
+###   @4=1500
+###   @5='0.17'
+###   @6='2/13/2023'
+###   @7='Post-IPO'
+###   @8='United States'
+###   @9=614
+###   @10=1
+# at 1096
+#261007  9:09:53 server id 1  end_log_pos 1127 CRC32 0x340b9f47 	Xid = 913
+COMMIT/*!*/;
+SET @@SESSION.GTID_NEXT= 'AUTOMATIC' /* added by mysqlbinlog */ /*!*/;
+DELIMITER ;
+# End of log file
+/*!50003 SET COMPLETION_TYPE=@OLD_COMPLETION_TYPE*/;
+/*!50530 SET @@SESSION.PSEUDO_SLAVE_MODE=0*/;
